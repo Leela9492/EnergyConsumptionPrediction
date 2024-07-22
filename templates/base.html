@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="60">
+    <title>Image Forgery Detection</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/stylesheets/style.css">
+    <link rel="stylesheet" href="../static/stylesheets/fullpage.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans+Condensed:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        * {
+            box-shadow: none !important;
+        }
+
+        h1 {
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-family: 'Lato', sans-serif;
+        }
+
+        h1#title1 {
+            font-size: 75px;
+        }
+
+        h4#subtitle1 {
+            font-size: 30px;
+        }
+
+        h1#title2 {
+            font-size: 55px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        h4#subtitle2 {
+            font-size: 22px;
+            text-align: justify;
+            color: white;
+        }
+
+        .image-container {
+            width: 300px;
+            min-height: 100px;
+            border: 2px solid #dddddd;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #cccccc;
+        }
+
+        .image-preview__image {
+            display: none;
+            width: 100%;
+        }
+
+        #linkedin,
+        #github,
+        #submit {
+            margin-top: 10px;
+            background-color: transparent;
+            border-radius: 15px;
+        }
+
+        #linkedin:hover,
+        #github:hover,
+        #submit:hover {
+            color: white;
+            background-color: black;
+        }
+
+        .interactiveDiv {
+            background-color: rgba(255, 255, 255, 0.452);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .interactiveDiv {
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            #caption {
+                background-color: white;
+            }
+        }
+
+        #textbox1,
+        #textbox2,
+        #textbox3 {
+            animation: fadeInAnimation ease 3s;
+            animation-fill-mode: forwards;
+            animation-play-state: paused;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section">
+            <div class="container" id="textbox1">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 id="title1">Energy <br> Prediction</h1>
+                        <h4 id="subtitle1">A Machine LEARNING APPROACH</h4>
+                    </div>
+                    <div class="d-none d-lg-block col-lg-6">
+                        <img src="../static/images/e2.svg" width="450" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <center>
+                <div class="row">
+                    <div class="col-md-5 col-12 {{'offset-md-3 pl-md-5' if not output}}">
+                        <div class="ml-md-5 interactiveDiv">
+                            <h5 class="pb-1">Predict Here</h5>
+                            <div class="image-preview mb-3" id="imagePreview">
+                                <img alt="Image Preview" class="image-preview__image img-fluid"
+                                    style="width: auto; max-height: 60vh;">
+                            </div>
+                        
+                                <form action="/" method="POST">
+                                    <input type="number" class="form-control" id="low_consum" name="low_consum" step="0.01" placeholder="low_consum">
+                                    <input type="number" class="form-control mt-2" id="high_consum" name="high_consum" step="0.01" placeholder="high_consum">
+                                    <!-- Repeat for other float inputs -->
+                                    <input type="number" class="form-control mt-2" id="hours" name="hours" step="0.01" placeholder="hours">
+                                    <input type="number" class="form-control mt-2" id="t6" name="t6" step="0.01" placeholder="t6">
+                                    <input type="number" class="form-control mt-2" id="rh_6" name="rh_6" step="0.01" placeholder="rh_6">
+                                    <input type="number" class="form-control mt-2" id="lights" name="lights" step="0.01" placeholder="lights">
+                                    <input type="number" class="form-control mt-2" id="hour_lights" name="hour_lights" step="0.01" placeholder="hour_lights">
+                                    <input type="number" class="form-control mt-2" id="tdewpoint" name="tdewpoint" step="0.01" placeholder="tdewpoint">
+                                    <input type="number" class="form-control mt-2" id="visibility" name="visibility" step="0.01" placeholder="visibility">
+                                    <input type="number" class="form-control mt-2" id="press_mm_hg" name="press_mm_hg" step="0.01" placeholder="press_mm_hg">
+                                    <input type="number" class="form-control mt-2" id="windspeed" name="windspeed" step="0.01" placeholder="windspeed">
+                                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                </form>
+                            
+                        </div>
+                    </div>
+                    {% if output %}
+                    <div class="col-md-7 col-8 mt-6">
+                        <div class="interactiveDiv p-4" style="width: 100%; max-width: 600px; border: 2px solid #ccc; border-radius: 10px;">
+                            <h5 class="pb-2" style="font-size: 40px;">Prediction</h5>
+                            <table style="width: 100%; margin-bottom: 20px;">
+                                <tr>
+                                    <th style="text-align: left;">Input Values</th>
+                                    <th style="text-align: left;">Value</th>
+                                </tr>
+                                {% for column, value in col.items() %}
+                                <tr>
+                                    <td>{{ column.capitalize().replace('_', ' ') }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            <hr style="margin: 20px 0;">
+                            <h6 style="font-weight: bold; margin-bottom: 10px;">Prediction:</h6>
+                            <p style="font-weight: bold; margin-bottom: 10px;color: rgb(18, 14, 16);">{{ prediction }}</p>
+                        </div>
+                    </div>
+                                        
+                    {% endif %}
+                </div>
+            </center>
+        </div>
+        
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="../static/scripts/fullpage.min.js"></script>
+    <script>
+        var fullpage_api = new fullpage('#fullpage', {
+            autoScrolling: true,
+            scrollHorizontally: true,
+            verticallyCentered: true,
+            responsiveWidth: 767,
+            anchors: ['section1', 'section2'],
+
+            afterLoad: function (origin, destination, direction) {
+                if (destination.index === 0)
+                    document.getElementById('textbox1').style.animationPlayState = 'running';
+                
+                if (destination.index === 3)
+                    document.getElementById('textbox3').style.animationPlayState = 'running';
+            }
+        });
+
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        const inpFile = document.getElementById('customFile');
+        const previewContainer = document.getElementById('imagePreview');
+        const previewImage = previewContainer.querySelector('.image-preview__image');
+
+        inpFile.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                previewImage.style.display = "block";
+
+                reader.addEventListener("load", function () {
+                    previewImage.setAttribute("src", this.result);
+                });
+
+                reader.readAsDataURL(file);
+            }
+        })
+    </script>
+    {% if output %}
+    <script>
+        fullpage_api.silentMoveTo(3);
+    </script>
+    {% endif %}
+</body>
+
+</html>
